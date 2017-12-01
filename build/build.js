@@ -8,6 +8,8 @@ const fs = require('fs'),
       handlebars = require('handlebars'),
       inquirer = require('inquirer'),
       less = require('less'),
+      request = require('request'),
+      Client = require('ssh2').Client,
       _ = require('lodash')
 
 var questions = require('./meta'),
@@ -54,22 +56,33 @@ function buildFiles () {
 }
 
 function buildCss (next) {
-  // CSS
-  var mainLess = fs.readFileSync('./build/less/main.less').toString()
-  less.render(mainLess, {
-    paths: ['./build/less'],
-    filename: 'main.less',
-    modifyVars: {
-      'module': data.module,
-      'mainColor': data.mainColor,
-      'sideColor': data.sideColor,
-      'ligthColor': data.ligthColor
-    }
-  })
-  .then(function(output) {
-    fs.writeFileSync(dist + 'assets/styles.css', output.css)
-    // console.log('   => build css')
-    next()
+
+  request.get({
+    url: 'http://www.liberation.fr/mapi/ptitlibe/?format=json',
+    json: true
+  }, (err, res, json) => {
+    if (err) throw err
+    var current = json.results.find(d => d.id == data.id),
+        settings = current.settings
+
+    // CSS
+    var mainLess = fs.readFileSync('./build/less/main.less').toString()
+    less.render(mainLess, {
+      paths: ['./build/less'],
+      filename: 'main.less',
+      modifyVars: {
+        'module': data.module,
+        'mainColor': settings.color4,
+        'sideColor': settings.color1,
+        'ligthColor': settings.color2
+      }
+    })
+    .then(function(output) {
+      fs.writeFileSync(dist + 'assets/styles.css', output.css)
+      // console.log('   => build css')
+      next()
+    })
+
   })
 
 }
