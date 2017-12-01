@@ -98,24 +98,5 @@ module.exports = [
     name: 'subTitle',
     message: 'Consigne',
     default: false
-  },
-  {
-    type: 'input',
-    name: 'mainColor',
-    message: 'Couleur 4',
-    validate: (input) => required(input)
-  },
-  {
-    type: 'input',
-    name: 'sideColor',
-    message: 'Couleur 1',
-    validate: (input) => required(input)
-  },
-  {
-    type: 'input',
-    name: 'ligthColor',
-    message: 'Couleur 2',
-    default: '#ffffff',
-    validate: (input) => required(input)
   }
 ]
