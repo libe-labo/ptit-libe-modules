@@ -19,6 +19,12 @@ module.exports = [
     filter: Number
   },
   {
+    type: 'input',
+    name: 'id',
+    message: 'ID du Ptit Libé',
+    validate: (input) => required(input)
+  },
+  {
     type: 'list',
     name: 'module',
     message: 'Quel type de module?',
