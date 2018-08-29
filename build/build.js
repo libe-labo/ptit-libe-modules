@@ -163,7 +163,7 @@ function printResult () {
   console.log('   http://www.liberation.fr/apps/ptit-libe/modules/' + data.path + '\n')
 
   console.log('=> Et l\'iframe pour l\'article :')
-  console.log('   <iframe src="http://www.liberation.fr/apps/ptit-libe/modules/' + data.path + '" class="fit-content" width="100%"></iframe> \n')
+  console.log('   <iframe src="https://statics.liberation.fr/apps/ptit-libe/modules/' + data.path + '" class="fit-content" width="100%"></iframe> \n')
 
   console.log('\n* End Process *\n')
 }
