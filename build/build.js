@@ -30,17 +30,13 @@ inquirer.prompt(questions).then(function (answers) {
 function buildFiles () {
   src = './build/template/ptitlibe-' + data.module + '/',
   dist = './dist/' + data.path
-
   del.sync(dist)
   mkdirp.sync(dist)
-
   // HTML
   var source = fs.readFileSync(src + 'index.html').toString(),
       template = handlebars.compile(source),
       html = template(data)
-
   fs.writeFileSync(dist + 'index.html', html)
-  
   // ASSETS
   copy(src + 'assets/**', dist + 'assets/', function(err, files) {
     if (err) throw err
@@ -163,7 +159,7 @@ function printResult () {
   console.log('   http://www.liberation.fr/apps/ptit-libe/modules/' + data.path + '\n')
 
   console.log('=> Et l\'iframe pour l\'article :')
-  console.log('   <iframe src="https://statics.liberation.fr/apps/ptit-libe/modules/' + data.path + '" class="fit-content no-clean" width="100%"></iframe> \n')
+  console.log('   <iframe src="https://statics.liberation.fr/apps/ptit-libe/modules/' + data.path + '" class="fit-content no-clean" height="400" width="100%"></iframe> \n')
 
   console.log('\n* End Process *\n')
 }

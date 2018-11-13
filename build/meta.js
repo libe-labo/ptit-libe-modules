@@ -57,7 +57,7 @@ module.exports = [
   {
     type: 'confirm',
     name: 'isLeaf',
-    message: 'Est ce qu\'il y a plusieur feuilles dans le sheet ?',
+    message: 'Est ce qu\'il y a plusieurs feuilles dans le sheet ?',
     validate: (input) => required(input),
     when (answers) {
       return answers.module !== 'carte'
